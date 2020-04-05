@@ -5,17 +5,28 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<button id="btn1">Show simple message!</button>
+<button id="testBtn">Show simple message!</button>
 
 <script type="module">
   import NotificationMessage from './notification.js';
 
-  btn1.addEventListener('click', () => {
-    const notification = new NotificationMessage('hello world', {
-      duration: 2000,
-      type: 'success'
-    });
+  new NotificationMessage('Hello world').show();
 
-    notification.show();
+  testBtn.addEventListener('click', () => {
+    new NotificationMessage(generateRandomWord(), {
+      duration: generateRandomNumber(1000, 2000),
+      type: Math.random() >= 0.5 ? 'success' : 'error'
+    }).show();
   });
+
+  function generateRandomNumber (start, end) {
+    return start + Math.random() * end;
+  }
+
+  function generateRandomWord () {
+    const words = ['apple', 'banana', 'orange', 'tomato', 'grape'];
+
+    return words[Math.round(generateRandomNumber(0, 2))];
+  }
+
 </script>
